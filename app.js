@@ -2,11 +2,12 @@
 
 // Character Generator Function
 
-function randomIndex() {
-    return Math.floor(Math.random() * structuredClone.length);
+function randomIndex(str) {
+    return Math.floor(Math.random() * str.length);
 };
 
 console.log(randomIndex('Chicken'));
+
 
 function getRandomLower() {
     const letters = 'abcdefghijklmnopqrstuvwyz';
@@ -54,7 +55,7 @@ const generateEl = document.querySelector('#generate');
 
 function generatePassword(lower, upper, number, symbol, length) {
 
-    let generatePassword = '';
+    let generatedPassword = '';
 
     const typesCount = lower + upper + number + symbol;
     console.log(typesCount);
@@ -74,22 +75,22 @@ function generatePassword(lower, upper, number, symbol, length) {
     console.log(typesArr);
 
 
-    typesArr = typesArr, filter((item) => {
+    typesArr = typesArr.filter((item) => {
         console.log(item[1]);
         return item[1]
     });
     console.log(typesArr);
 
-    for (i = 0; i < length; i += typesCount) {
+    for (i = 0; i<length; i+= typesCount) {
 
         typesArr.forEach((type) => {
             const funcName = type[0];
             console.log(funcName);
-            generatePassword += randomFunctions[funcName]();
-            console.log(generatePassword);
-        })
+            generatedPassword += randomFunctions[funcName]();
+            console.log(generatedPassword);
+        });
     }
-    const finalPassword = generatePassword.slice(0, length)
+    const finalPassword = generatedPassword.slice(0, length)
     console.log(finalPassword);
 
     return finalPassword;
@@ -114,13 +115,13 @@ generateEl.addEventListener('click', () => {
 clipboardEl.addEventListener('click', () => {
     const password = resultEl.innerText;
 
-    if (password === ''){
+    if (password === '') {
         alert('Please generate a password first');
         return
-    } 
+    }
 
     navigator.clipboard.writeText(password);
-    
+
     alert('Copied to clipboard');
 
 });
